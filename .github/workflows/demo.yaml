@@ -18,7 +18,6 @@ jobs:
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}  # Secret config needed to access Keeper
           secrets: |-
-            # Mapping Keeper records to variables and files
             GzPJKNrw4TAvdX29NORoXA/title > REC_TITLE
             GzPJKNrw4TAvdX29NORoXA/type > REC_TYPE
             GzPJKNrw4TAvdX29NORoXA/field/login > LOGIN
@@ -47,5 +46,4 @@ jobs:
       # Step 4: Print Reversed File Content
       - name: Print Reversed File Content
         run: |
-          # Displaying contents of the command.txt file reversed
           rev /tmp/cmd.txt
