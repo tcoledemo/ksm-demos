@@ -1,0 +1,51 @@
+name: Build and Sign Go Application
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-sign:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Retrieve secrets from Keeper
+        id: ksecrets
+        uses: Keeper-Security/ksm-action@master
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+          secrets: |-
+            bavsKZY_NufFZGqwyduvGw/field/password > PASSWORD
+            bavsKZY_NufFZGqwyduvGw/file/private.key > file:/tmp/private.key
+            bavsKZY_NufFZGqwyduvGw/file/public.key > file:/tmp/public.key
+            
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.18'
+
+      - name: Setup GPG
+        run: |
+          echo "Importing GPG private key"
+          gpg --import /tmp/private.key
+          rm /tmp/private.key
+        env:
+          GPG_PRIVATE_KEY: ${{ steps.ksecrets.outputs.PASSWORD }}
+
+      - name: Build Go application
+        run: go build -o hello-world main.go
+
+      - name: Sign the binary
+        run: |
+          echo "GPG_PASSPHRASE=${{ steps.ksecrets.outputs.PASSWORD }}" >> $GITHUB_ENV
+          gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --armor --output hello-world.asc --detach-sign hello-world
+        env:
+          GPG_PASSPHRASE: ${{ steps.ksecrets.outputs.PASSWORD }}
+
+      - name: Upload signed binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: signed-binary
+          path: hello-world.asc
