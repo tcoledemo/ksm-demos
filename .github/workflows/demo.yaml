@@ -46,4 +46,6 @@ jobs:
       # Step 4: Print Reversed File Content
       - name: Print Reversed File Content
         run: |
+          ls -lah /tmp
+          echo "Contents of /tmp/cmd.txt:"
           rev /tmp/cmd.txt
