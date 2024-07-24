@@ -5,6 +5,7 @@ on:
 
 jobs:
   build-and-sign:
+    environment: prod
     runs-on: ubuntu-latest
 
     steps:
