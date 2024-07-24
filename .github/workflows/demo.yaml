@@ -17,6 +17,8 @@ jobs:
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
           secrets: |-
+            GzPJKNrw4TAvdX29NORoXA/title > REC_TITLE
+            GzPJKNrw4TAvdX29NORoXA/type > REC_TYPE
             GzPJKNrw4TAvdX29NORoXA/field/login > LOGIN
             GzPJKNrw4TAvdX29NORoXA/field/password > PASSWORD
             GzPJKNrw4TAvdX29NORoXA/custom_field/ExampleMultilineText > env:ExampleMultilineText
@@ -28,8 +30,11 @@ jobs:
       # Print variables
       - name: Print Step Output Variables
         run: |
-          echo "   Login is: ${{ steps.ksecrets.outputs.LOGIN }}"
-          echo "Password is: ${{ steps.ksecrets.outputs.PASSWORD }}"
+          echo "Record Title is: ${{ steps.ksecrets.outputs.REC_TITLE }}"
+          echo " Record Type is: ${{ steps.ksecrets.outputs.REC_TYPE }}"
+          echo "       Login is: ${{ steps.ksecrets.outputs.LOGIN }}"
+          echo "    Password is: ${{ steps.ksecrets.outputs.PASSWORD }}"
+          echo "      Login2 is: ${{ steps.ksecrets.outputs.LOGIN2 }}"
 
       - name: Print Environment Variables
         run: |
