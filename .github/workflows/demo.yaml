@@ -1,21 +1,24 @@
 name: Test GHA with Keeper
 
+# Triggers the workflow manually from the GitHub Actions tab
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build
-    environment: test
-    runs-on: ubuntu-latest
-    steps:
+    name: Build and Retrieve Secrets
+    environment: test  # Specifies the environment used for this job
+    runs-on: ubuntu-latest  # The type of runner that the job will execute on
 
+    steps:
+      # Step 1: Retrieve secrets from Keeper
       - name: Retrieve secrets from Keeper
-        id: ksecrets # ID for the step output will be used in the next steps
+        id: ksecrets  # This ID will be used to reference outputs from this step
         uses: Keeper-Security/ksm-action@master
         with:
-          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}  # Secret config needed to access Keeper
           secrets: |-
+            # Mapping Keeper records to variables and files
             GzPJKNrw4TAvdX29NORoXA/title > REC_TITLE
             GzPJKNrw4TAvdX29NORoXA/type > REC_TYPE
             GzPJKNrw4TAvdX29NORoXA/field/login > LOGIN
@@ -26,20 +29,23 @@ jobs:
             GitHub Action: Keeper Demo - Login/field/password > env:PASSWORD2
             GitHub Action: Keeper Demo - Login/file/image.png > file:/tmp/img.png
 
-      ######  Print variables
+      # Step 2: Print Step Output Variables
       - name: Print Step Output Variables
         run: |
           echo "Record Title is: ${{ steps.ksecrets.outputs.REC_TITLE }}"
-          echo " Record Type is: ${{ steps.ksecrets.outputs.REC_TYPE }}"
-          echo "       Login is: ${{ steps.ksecrets.outputs.LOGIN }}"
-          echo "    Password is: ${{ steps.ksecrets.outputs.PASSWORD }}"
+          echo "Record Type is: ${{ steps.ksecrets.outputs.REC_TYPE }}"
+          echo "Login is: ${{ steps.ksecrets.outputs.LOGIN }}"
+          echo "Password is: ${{ steps.ksecrets.outputs.PASSWORD }}"
 
+      # Step 3: Print Environment Variables
       - name: Print Environment Variables
         run: |
           echo "ExampleMultilineText is: ${{ env.ExampleMultilineText }}"
-          echo "              Login2 is: ${{ env.LOGIN2 }}"
-          echo "           Password2 is: ${{ env.PASSWORD2 }}"
+          echo "Login2 is: ${{ env.LOGIN2 }}"
+          echo "Password2 is: ${{ env.PASSWORD2 }}"
 
+      # Step 4: Print File Content
       - name: Print File Content
         run: |
+          # Displaying contents of the command.txt file
           cat /tmp/cmd.txt
