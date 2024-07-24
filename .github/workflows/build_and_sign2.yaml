@@ -1,4 +1,4 @@
-name: Build all platform binaries
+name: Create other binaries
 
 on:
   workflow_dispatch:
