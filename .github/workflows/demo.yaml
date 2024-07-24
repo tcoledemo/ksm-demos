@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     name: Build and Retrieve Secrets
-    environment: test  # Specifies the environment used for this job
+    environment: test
     runs-on: ubuntu-latest  # The type of runner that the job will execute on
 
     steps:
