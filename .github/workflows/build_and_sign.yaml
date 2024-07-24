@@ -29,9 +29,7 @@ jobs:
 
       - name: Setup GPG
         run: |
-          echo "Importing GPG private key"
-          gpg --import /tmp/private.key
-          rm /tmp/private.key
+          echo "${{ steps.ksecrets.outputs.PASSWORD }}" | gpg --batch --import /tmp/private.key
         env:
           GPG_PRIVATE_KEY: ${{ steps.ksecrets.outputs.PASSWORD }}
 
@@ -40,8 +38,7 @@ jobs:
 
       - name: Sign the binary
         run: |
-          echo "GPG_PASSPHRASE=${{ steps.ksecrets.outputs.PASSWORD }}" >> $GITHUB_ENV
-          gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --armor --output hello-world.asc --detach-sign hello-world
+          echo "${{ steps.ksecrets.outputs.PASSWORD }}" | gpg --batch --yes --passphrase-fd 0 --armor --output hello-world.asc --detach-sign hello-world
         env:
           GPG_PASSPHRASE: ${{ steps.ksecrets.outputs.PASSWORD }}
 
