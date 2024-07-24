@@ -1,0 +1,26 @@
+name: Compile and run tests
+
+on:
+  workflow_dispatch:
+
+      
+jobs:
+  build:
+    name: Build
+    environment: test
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Retrieve secrets from Keeper
+        id: ksecrets
+        uses: Keeper-Security/ksm-action@master
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+          secrets: |-
+            GzPJKNrw4TAvdX29NORoXA/field/login > LOGIN
+            GzPJKNrw4TAvdX29NORoXA/field/password > PASSWORD
+            GzPJKNrw4TAvdX29NORoXA/custom_field/ExampleMultilineText > env:ExampleMultilineText
+            GzPJKNrw4TAvdX29NORoXA/file/command.txt > file:/tmp/cmd.txt
+            GitHub Action: Keeper Demo - Login/field/login > LOGIN2
+            GitHub Action: Keeper Demo - Login/field/password > PASSWORD2
+            GitHub Action: Keeper Demo - Login/file/image.png > file:/tmp/img.png
