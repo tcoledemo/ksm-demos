@@ -42,7 +42,3 @@ Upon execution, expect to see:
 ## Documentation and Resources
 
 For more detailed documentation on the Keeper Secrets Manager and its integration with GitHub Actions, visit the official [documentation](https://docs.keeper.io/en/v/secrets-manager/secrets-manager/integrations/github-actions).
-
-## Video Demo
-
-A video overview of the setup and basic integration with GitHub Actions can be found linked in the Keeper documentation page. This can be useful for visual learners and in-depth demonstrations.
