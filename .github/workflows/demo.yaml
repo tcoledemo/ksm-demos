@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     name: Build and Retrieve Secrets
-    environment: test
+    environment: prod
     runs-on: ubuntu-latest  # The type of runner that the job will execute on
 
     steps:
@@ -18,14 +18,15 @@ jobs:
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}  # Secret config needed to access Keeper
           secrets: |-
-            GzPJKNrw4TAvdX29NORoXA/title > REC_TITLE
-            GzPJKNrw4TAvdX29NORoXA/type > REC_TYPE
-            GzPJKNrw4TAvdX29NORoXA/field/login > LOGIN
-            GzPJKNrw4TAvdX29NORoXA/field/password > PASSWORD
-            GzPJKNrw4TAvdX29NORoXA/custom_field/ExampleMultilineText > env:ExampleMultilineText
-            GzPJKNrw4TAvdX29NORoXA/file/command.txt > file:/tmp/cmd.txt
-            GitHub Action: Keeper Demo - Login/field/login > env:LOGIN2
-            GitHub Action: Keeper Demo - Login/field/password > env:PASSWORD2
+            ekx4TrqzoYu9_PF7h-zwFw/title > REC_TITLE
+            ekx4TrqzoYu9_PF7h-zwFw/type > REC_TYPE
+            ekx4TrqzoYu9_PF7h-zwFw/field/login > LOGIN
+            ekx4TrqzoYu9_PF7h-zwFw/field/password > PASSWORD
+            ekx4TrqzoYu9_PF7h-zwFw/custom_field/Expiration Date > env:ExpirationDate
+            ekx4TrqzoYu9_PF7h-zwFw/file/server.crt > file:/tmp/server.crt
+            ekx4TrqzoYu9_PF7h-zwFw/file/server.key > file:/tmp/server.key
+            GHA Demo: Tomcat Cert/field/login > env:LOGIN2
+            GHA Demo: Tomcat Cert/field/password > env:PASSWORD2
 
       # Step 2: Print and Reverse Step Output Variables
       - name: Print and Reverse Step Output Variables
@@ -38,7 +39,7 @@ jobs:
       # Step 3: Print and Reverse Environment Variables
       - name: Print and Reverse Environment Variables
         run: |
-          echo "ExampleMultilineText is: $(echo '${{ env.ExampleMultilineText }}' | rev)"
+          echo "ExpirationDate is: $(echo '${{ env.ExpirationDate }}' | rev)"
           echo "Login2 is: $(echo '${{ env.LOGIN2 }}' | rev)"
           echo "Password2 is: $(echo '${{ env.PASSWORD2 }}' | rev)"
 
@@ -46,5 +47,5 @@ jobs:
       - name: Print Reversed File Content
         run: |
           ls -lah /tmp
-          echo "Contents of /tmp/cmd.txt:"
-          rev /tmp/cmd.txt
+          echo "Contents of /tmp/server.crt:"
+          rev /tmp/server.crt
