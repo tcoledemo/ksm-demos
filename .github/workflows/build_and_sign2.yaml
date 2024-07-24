@@ -1,4 +1,4 @@
-name: Build and Sign Go Application 2
+name: Build all platform binaries
 
 on:
   workflow_dispatch:
