@@ -26,7 +26,7 @@ jobs:
             GzPJKNrw4TAvdX29NORoXA/file/command.txt > file:/tmp/cmd.txt
             GitHub Action: Keeper Demo - Login/field/login > env:LOGIN2
             GitHub Action: Keeper Demo - Login/field/password > env:PASSWORD2
-#            GitHub Action: Keeper Demo - Login/file/image.png > file:/tmp/img.png
+            GitHub Action: Keeper Demo - Login/file/image.png > file:/tmp/img.png
 
       # Step 2: Print and Reverse Step Output Variables
       - name: Print and Reverse Step Output Variables
