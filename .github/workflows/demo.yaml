@@ -1,4 +1,4 @@
-name: Test GHA with Keeper
+name: Github action basic
 
 # Triggers the workflow manually from the GitHub Actions tab
 on:
