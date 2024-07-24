@@ -1,4 +1,4 @@
-name: Compile and run tests
+name: Test GHA with Keeper
 
 on:
   workflow_dispatch:
@@ -19,8 +19,8 @@ jobs:
           secrets: |-
             GzPJKNrw4TAvdX29NORoXA/field/login > LOGIN
             GzPJKNrw4TAvdX29NORoXA/field/password > PASSWORD
-            GzPJKNrw4TAvdX29NORoXA/custom_field/ExampleMultilineText > env:ExampleMultilineText
-            GzPJKNrw4TAvdX29NORoXA/file/command.txt > file:/tmp/cmd.txt
-            GitHub Action: Keeper Demo - Login/field/login > LOGIN2
-            GitHub Action: Keeper Demo - Login/field/password > PASSWORD2
-            GitHub Action: Keeper Demo - Login/file/image.png > file:/tmp/img.png
+#            GzPJKNrw4TAvdX29NORoXA/custom_field/ExampleMultilineText > env:ExampleMultilineText
+#            GzPJKNrw4TAvdX29NORoXA/file/command.txt > file:/tmp/cmd.txt
+#            GitHub Action: Keeper Demo - Login/field/login > LOGIN2
+#            GitHub Action: Keeper Demo - Login/field/password > PASSWORD2
+#            GitHub Action: Keeper Demo - Login/file/image.png > file:/tmp/img.png
