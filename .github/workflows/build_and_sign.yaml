@@ -27,11 +27,6 @@ jobs:
         with:
           go-version: '1.18'
 
-      - name: Configure GPG Agent
-        run: |
-          echo 'allow-loopback-pinentry' >> ~/.gnupg/gpg-agent.conf
-          gpg-connect-agent reloadagent /bye
-
       - name: Import GPG Key
         run: |
           echo "${{ steps.ksecrets.outputs.PASSWORD }}" | gpg --batch --yes --passphrase-fd 0 --import /tmp/private.key
