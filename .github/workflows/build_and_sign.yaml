@@ -42,6 +42,13 @@ jobs:
         env:
           GPG_PASSPHRASE: ${{ steps.ksecrets.outputs.PASSWORD }}
 
+      - name: Verify the signature
+        run: |
+          gpg --verify hello-world.asc hello-world
+
+      - name: Run the binary
+        run: ./hello-world
+        
       - name: Upload signed binary
         uses: actions/upload-artifact@v2
         with:
