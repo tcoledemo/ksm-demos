@@ -29,23 +29,23 @@ jobs:
             GitHub Action: Keeper Demo - Login/field/password > env:PASSWORD2
             GitHub Action: Keeper Demo - Login/file/image.png > file:/tmp/img.png
 
-      # Step 2: Print Step Output Variables
-      - name: Print Step Output Variables
+      # Step 2: Print and Reverse Step Output Variables
+      - name: Print and Reverse Step Output Variables
         run: |
-          echo "Record Title is: ${{ steps.ksecrets.outputs.REC_TITLE }}"
-          echo "Record Type is: ${{ steps.ksecrets.outputs.REC_TYPE }}"
-          echo "Login is: ${{ steps.ksecrets.outputs.LOGIN }}"
-          echo "Password is: ${{ steps.ksecrets.outputs.PASSWORD }}"
+          echo "Record Title is: $(echo '${{ steps.ksecrets.outputs.REC_TITLE }}' | rev)"
+          echo "Record Type is: $(echo '${{ steps.ksecrets.outputs.REC_TYPE }}' | rev)"
+          echo "Login is: $(echo '${{ steps.ksecrets.outputs.LOGIN }}' | rev)"
+          echo "Password is: $(echo '${{ steps.ksecrets.outputs.PASSWORD }}' | rev)"
 
-      # Step 3: Print Environment Variables
-      - name: Print Environment Variables
+      # Step 3: Print and Reverse Environment Variables
+      - name: Print and Reverse Environment Variables
         run: |
-          echo "ExampleMultilineText is: ${{ env.ExampleMultilineText }}"
-          echo "Login2 is: ${{ env.LOGIN2 }}"
-          echo "Password2 is: ${{ env.PASSWORD2 }}"
+          echo "ExampleMultilineText is: $(echo '${{ env.ExampleMultilineText }}' | rev)"
+          echo "Login2 is: $(echo '${{ env.LOGIN2 }}' | rev)"
+          echo "Password2 is: $(echo '${{ env.PASSWORD2 }}' | rev)"
 
-      # Step 4: Print File Content
-      - name: Print File Content
+      # Step 4: Print Reversed File Content
+      - name: Print Reversed File Content
         run: |
-          # Displaying contents of the command.txt file
-          cat /tmp/cmd.txt
+          # Displaying contents of the command.txt file reversed
+          rev /tmp/cmd.txt
