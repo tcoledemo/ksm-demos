@@ -27,9 +27,14 @@ jobs:
         with:
           go-version: '1.18'
 
-      - name: Setup GPG
+      - name: Configure GPG Agent
         run: |
-          echo "${{ steps.ksecrets.outputs.PASSWORD }}" | gpg --batch --import /tmp/private.key
+          echo 'allow-loopback-pinentry' >> ~/.gnupg/gpg-agent.conf
+          gpg-connect-agent reloadagent /bye
+
+      - name: Import GPG Key
+        run: |
+          echo "${{ steps.ksecrets.outputs.PASSWORD }}" | gpg --batch --yes --passphrase-fd 0 --import /tmp/private.key
         env:
           GPG_PRIVATE_KEY: ${{ steps.ksecrets.outputs.PASSWORD }}
 
@@ -38,7 +43,7 @@ jobs:
 
       - name: Sign the binary
         run: |
-          echo "${{ steps.ksecrets.outputs.PASSWORD }}" | gpg --batch --yes --passphrase-fd 0 --armor --output hello-world.asc --detach-sign hello-world
+          echo "${{ steps.ksecrets.outputs.PASSWORD }}" | gpg --batch --yes --passphrase-fd 0 --pinentry-mode loopback --armor --output hello-world.asc --detach-sign hello-world
         env:
           GPG_PASSPHRASE: ${{ steps.ksecrets.outputs.PASSWORD }}
 
