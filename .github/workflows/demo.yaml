@@ -24,3 +24,17 @@ jobs:
 #            GitHub Action: Keeper Demo - Login/field/login > LOGIN2
 #            GitHub Action: Keeper Demo - Login/field/password > PASSWORD2
 #            GitHub Action: Keeper Demo - Login/file/image.png > file:/tmp/img.png
+
+      # Print variables
+      - name: Print Step Output Variables
+        run: |
+          echo "   Login is: ${{ steps.ksecrets.outputs.LOGIN }}"
+          echo "Password is: ${{ steps.ksecrets.outputs.PASSWORD }}"
+
+      - name: Print Environment Variables
+        run: |
+          echo "ExampleMultilineText is ${{ env.ExampleMultilineText }}"
+
+      - name: Print File Content
+        run: |
+          cat /tmp/cmd.txt
