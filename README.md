@@ -27,17 +27,18 @@ Before using this GitHub Action, ensure the following prerequisites are met:
 
 To execute this action:
 
-1. **Manual Trigger**: This action is configured to trigger manually through the GitHub UI under the *Actions* tab using `workflow_dispatch`.
-2. **Output Handling**:
-    - Step outputs like `REC_TITLE`, `LOGIN`, etc., are retrieved from the specified Keeper records.
-    - Environment variables like `LOGIN2`, `PASSWORD2`, etc., are set directly for use in subsequent steps.
-    - Files specified in the Keeper queries are copied to the specified paths like `/tmp/cmd.txt`.
+**Manual Trigger**: This action is configured to trigger manually through the GitHub UI under the *Actions* tab using `workflow_dispatch`.
 
-## Expected Outputs
+## Explanation of Demo
 
-Upon execution, expect to see:
-- Output parameters printed from the step outputs.
-- Environment variables and file contents displayed in the GitHub Actions logs.
+Upon execution, the following takes place:
+- A Github Action ubuntu runner is launched
+- A GPG public/private key pair and password is pulled from the Keeper vault
+- The GPG key from Keeper is imported
+- A sample "Hello World" Go application is built
+- The binary is signed with the GPG key
+- The signature is displayed
+- The application is run
 
 ## Documentation and Resources
 
