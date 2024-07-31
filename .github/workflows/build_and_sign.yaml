@@ -15,9 +15,9 @@ jobs:
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
           secrets: |-
-            bavsKZY_NufFZGqwyduvGw/field/password > PASSWORD
-            bavsKZY_NufFZGqwyduvGw/file/private.key > file:/tmp/private.key
-            bavsKZY_NufFZGqwyduvGw/file/public.key > file:/tmp/public.key
+            o5IuHXuXUZyNqxLKB2o1ew/field/password > PASSWORD
+            o5IuHXuXUZyNqxLKB2o1ew/file/private.key > file:/tmp/private.key
+            o5IuHXuXUZyNqxLKB2o1ew/file/public.key > file:/tmp/public.key
             
       - name: Checkout code
         uses: actions/checkout@v2
